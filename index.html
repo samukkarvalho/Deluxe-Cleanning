@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,42 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .language-switcher button {
+            background: none;
+            border: 2px solid #2563a8;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .language-switcher button:hover {
+            background: #2563a8;
+            color: white;
+        }
+
+        .language-switcher button.active {
+            background: #2563a8;
+            color: white;
         }
 
         /* Header */
@@ -317,10 +353,27 @@
             .section-title {
                 font-size: 2rem;
             }
+
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .language-switcher button {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button onclick="switchLanguage('pt')" id="btn-pt">🇧🇷 PT</button>
+        <button onclick="switchLanguage('en')" id="btn-en" class="active">🇺🇸 EN</button>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="header-content">
@@ -330,7 +383,7 @@
                 </div>
                 <div class="company-info">
                     <h1>Deluxe Cleaning Services</h1>
-                    <p>Flavia Elisa - Profissionalismo e Qualidade</p>
+                    <p id="tagline">Flavia Elisa - Professionalism and Quality</p>
                 </div>
             </div>
             <div class="contact-header">
@@ -342,45 +395,46 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h2>Transformando Ambientes com Excelência</h2>
-        <p>Serviços de limpeza profissional com dedicação e qualidade superior</p>
-        <a href="#contact" class="cta-button">Solicite um Orçamento Grátis</a>
+        <h2 id="hero-title">Transforming Spaces with Excellence</h2>
+        <p id="hero-subtitle">Professional cleaning services with dedication and superior quality</p>
+        <a href="#contact" class="cta-button" id="cta-button">Request a Free Estimate</a>
     </section>
 
     <!-- Services Section -->
     <section class="services">
         <div class="container">
-            <h2 class="section-title">Nossos Serviços</h2>
+            <h2 class="section-title" id="services-title">Our Services</h2>
+            
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">🏠</div>
                     <h3>Basic Cleaning</h3>
-                    <p>Limpeza básica completa para manter seu espaço sempre impecável</p>
+                    <p id="service1-desc">Complete basic cleaning to keep your space always spotless</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">✨</div>
                     <h3>Deep Cleaning</h3>
-                    <p>Limpeza profunda e detalhada em todos os ambientes</p>
+                    <p id="service2-desc">Deep and detailed cleaning in all environments</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📦</div>
                     <h3>Move Out/In Cleaning</h3>
-                    <p>Limpeza especializada para mudanças</p>
+                    <p id="service3-desc">Specialized cleaning for moving</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🗂️</div>
                     <h3>Organization</h3>
-                    <p>Organização profissional de espaços</p>
+                    <p id="service4-desc">Professional space organization</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">💼</div>
                     <h3>Office Cleaning</h3>
-                    <p>Limpeza comercial e de escritórios</p>
+                    <p id="service5-desc">Commercial and office cleaning</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🌟</div>
-                    <h3>And More!</h3>
-                    <p>Diversos outros serviços personalizados</p>
+                    <h3 id="service6-title">And More!</h3>
+                    <p id="service6-desc">Various other customized services</p>
                 </div>
             </div>
         </div>
@@ -389,12 +443,13 @@
     <!-- Schedule Section -->
     <section class="schedule">
         <div class="container">
-            <h2 class="section-title">Horários Flexíveis</h2>
+            <h2 class="section-title" id="schedule-title">Flexible Schedule</h2>
+            
             <div class="schedule-options">
-                <div class="schedule-option">Weekly<br>Semanal</div>
-                <div class="schedule-option">Bi-weekly<br>Quinzenal</div>
-                <div class="schedule-option">Monthly<br>Mensal</div>
-                <div class="schedule-option">One Time Only<br>Única Vez</div>
+                <div class="schedule-option" id="schedule1">Weekly</div>
+                <div class="schedule-option" id="schedule2">Bi-weekly</div>
+                <div class="schedule-option" id="schedule3">Monthly</div>
+                <div class="schedule-option" id="schedule4">One Time Only</div>
             </div>
         </div>
     </section>
@@ -402,60 +457,49 @@
     <!-- Portfolio Section -->
     <section class="portfolio" id="portfolio">
         <div class="container">
-            <h2 class="section-title">Nosso Trabalho</h2>
+            <h2 class="section-title" id="portfolio-title">Our Work</h2>
+            
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <div class="portfolio-placeholder">
-                        [Foto/Vídeo 1]
-                    </div>
+                    <div class="portfolio-placeholder" id="portfolio-ph1">[Photo/Video 1]</div>
                     <div class="portfolio-info">
-                        <h3>Projeto 1</h3>
-                        <p>Adicione descrição do trabalho aqui</p>
+                        <h3 id="project1-title">Project 1</h3>
+                        <p id="project1-desc">Add project description here</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="portfolio-placeholder">
-                        [Foto/Vídeo 2]
-                    </div>
+                    <div class="portfolio-placeholder" id="portfolio-ph2">[Photo/Video 2]</div>
                     <div class="portfolio-info">
-                        <h3>Projeto 2</h3>
-                        <p>Adicione descrição do trabalho aqui</p>
+                        <h3 id="project2-title">Project 2</h3>
+                        <p id="project2-desc">Add project description here</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="portfolio-placeholder">
-                        [Foto/Vídeo 3]
-                    </div>
+                    <div class="portfolio-placeholder" id="portfolio-ph3">[Photo/Video 3]</div>
                     <div class="portfolio-info">
-                        <h3>Projeto 3</h3>
-                        <p>Adicione descrição do trabalho aqui</p>
+                        <h3 id="project3-title">Project 3</h3>
+                        <p id="project3-desc">Add project description here</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="portfolio-placeholder">
-                        [Foto/Vídeo 4]
-                    </div>
+                    <div class="portfolio-placeholder" id="portfolio-ph4">[Photo/Video 4]</div>
                     <div class="portfolio-info">
-                        <h3>Projeto 4</h3>
-                        <p>Adicione descrição do trabalho aqui</p>
+                        <h3 id="project4-title">Project 4</h3>
+                        <p id="project4-desc">Add project description here</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="portfolio-placeholder">
-                        [Foto/Vídeo 5]
-                    </div>
+                    <div class="portfolio-placeholder" id="portfolio-ph5">[Photo/Video 5]</div>
                     <div class="portfolio-info">
-                        <h3>Projeto 5</h3>
-                        <p>Adicione descrição do trabalho aqui</p>
+                        <h3 id="project5-title">Project 5</h3>
+                        <p id="project5-desc">Add project description here</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="portfolio-placeholder">
-                        [Foto/Vídeo 6]
-                    </div>
+                    <div class="portfolio-placeholder" id="portfolio-ph6">[Photo/Video 6]</div>
                     <div class="portfolio-info">
-                        <h3>Projeto 6</h3>
-                        <p>Adicione descrição do trabalho aqui</p>
+                        <h3 id="project6-title">Project 6</h3>
+                        <p id="project6-desc">Add project description here</p>
                     </div>
                 </div>
             </div>
@@ -465,11 +509,12 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title" style="color: white;">Entre em Contato</h2>
-            <p style="font-size: 1.3rem; margin-bottom: 2rem;">Orçamentos Gratuitos - Free Estimates</p>
+            <h2 class="section-title" id="contact-title" style="color: white;">Contact Us</h2>
+            <p id="contact-subtitle" style="font-size: 1.3rem; margin-bottom: 2rem;">Free Estimates</p>
+            
             <div class="contact-info">
                 <div class="contact-item">
-                    <strong>📞 Telefone</strong>
+                    <strong id="phone-label">📞 Phone</strong>
                     <a href="tel:+19145134661">(914) 513-4661</a>
                 </div>
                 <div class="contact-item">
@@ -477,8 +522,8 @@
                     <a href="mailto:ncdeluxecleaningservice@gmail.com">ncdeluxecleaningservice@gmail.com</a>
                 </div>
                 <div class="contact-item">
-                    <strong>👤 Proprietária</strong>
-                    Flavia Elisa
+                    <strong id="owner-label">👤 Owner</strong>
+                    <span>Flavia Elisa</span>
                 </div>
             </div>
         </div>
@@ -486,12 +531,175 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Deluxe Cleaning Services - Todos os direitos reservados</p>
-        <p>Desenvolvido com dedicação para Flavia Elisa</p>
+        <p id="copyright">&copy; 2026 Deluxe Cleaning Services - All rights reserved</p>
+        <p id="developed">Developed with dedication for Flavia Elisa</p>
     </footer>
 
     <script>
-        // Smooth scroll para links internos
+        // Translations object
+        const translations = {
+            en: {
+                tagline: "Flavia Elisa - Professionalism and Quality",
+                heroTitle: "Transforming Spaces with Excellence",
+                heroSubtitle: "Professional cleaning services with dedication and superior quality",
+                ctaButton: "Request a Free Estimate",
+                servicesTitle: "Our Services",
+                service1Desc: "Complete basic cleaning to keep your space always spotless",
+                service2Desc: "Deep and detailed cleaning in all environments",
+                service3Desc: "Specialized cleaning for moving",
+                service4Desc: "Professional space organization",
+                service5Desc: "Commercial and office cleaning",
+                service6Title: "And More!",
+                service6Desc: "Various other customized services",
+                scheduleTitle: "Flexible Schedule",
+                schedule1: "Weekly",
+                schedule2: "Bi-weekly",
+                schedule3: "Monthly",
+                schedule4: "One Time Only",
+                portfolioTitle: "Our Work",
+                portfolioPh1: "[Photo/Video 1]",
+                portfolioPh2: "[Photo/Video 2]",
+                portfolioPh3: "[Photo/Video 3]",
+                portfolioPh4: "[Photo/Video 4]",
+                portfolioPh5: "[Photo/Video 5]",
+                portfolioPh6: "[Photo/Video 6]",
+                project1Title: "Project 1",
+                project2Title: "Project 2",
+                project3Title: "Project 3",
+                project4Title: "Project 4",
+                project5Title: "Project 5",
+                project6Title: "Project 6",
+                project1Desc: "Add project description here",
+                project2Desc: "Add project description here",
+                project3Desc: "Add project description here",
+                project4Desc: "Add project description here",
+                project5Desc: "Add project description here",
+                project6Desc: "Add project description here",
+                contactTitle: "Contact Us",
+                contactSubtitle: "Free Estimates",
+                phoneLabel: "📞 Phone",
+                ownerLabel: "👤 Owner",
+                copyright: "© 2026 Deluxe Cleaning Services - All rights reserved",
+                developed: "Developed with dedication for Flavia Elisa"
+            },
+            pt: {
+                tagline: "Flavia Elisa - Profissionalismo e Qualidade",
+                heroTitle: "Transformando Ambientes com Excelência",
+                heroSubtitle: "Serviços de limpeza profissional com dedicação e qualidade superior",
+                ctaButton: "Solicite um Orçamento Grátis",
+                servicesTitle: "Nossos Serviços",
+                service1Desc: "Limpeza básica completa para manter seu espaço sempre impecável",
+                service2Desc: "Limpeza profunda e detalhada em todos os ambientes",
+                service3Desc: "Limpeza especializada para mudanças",
+                service4Desc: "Organização profissional de espaços",
+                service5Desc: "Limpeza comercial e de escritórios",
+                service6Title: "E Muito Mais!",
+                service6Desc: "Diversos outros serviços personalizados",
+                scheduleTitle: "Horários Flexíveis",
+                schedule1: "Semanal",
+                schedule2: "Quinzenal",
+                schedule3: "Mensal",
+                schedule4: "Única Vez",
+                portfolioTitle: "Nosso Trabalho",
+                portfolioPh1: "[Foto/Vídeo 1]",
+                portfolioPh2: "[Foto/Vídeo 2]",
+                portfolioPh3: "[Foto/Vídeo 3]",
+                portfolioPh4: "[Foto/Vídeo 4]",
+                portfolioPh5: "[Foto/Vídeo 5]",
+                portfolioPh6: "[Foto/Vídeo 6]",
+                project1Title: "Projeto 1",
+                project2Title: "Projeto 2",
+                project3Title: "Projeto 3",
+                project4Title: "Projeto 4",
+                project5Title: "Projeto 5",
+                project6Title: "Projeto 6",
+                project1Desc: "Adicione descrição do trabalho aqui",
+                project2Desc: "Adicione descrição do trabalho aqui",
+                project3Desc: "Adicione descrição do trabalho aqui",
+                project4Desc: "Adicione descrição do trabalho aqui",
+                project5Desc: "Adicione descrição do trabalho aqui",
+                project6Desc: "Adicione descrição do trabalho aqui",
+                contactTitle: "Entre em Contato",
+                contactSubtitle: "Orçamentos Gratuitos",
+                phoneLabel: "📞 Telefone",
+                ownerLabel: "👤 Proprietária",
+                copyright: "© 2026 Deluxe Cleaning Services - Todos os direitos reservados",
+                developed: "Desenvolvido com dedicação para Flavia Elisa"
+            }
+        };
+
+        // Language Switcher Function
+        function switchLanguage(lang) {
+            const btnPt = document.getElementById('btn-pt');
+            const btnEn = document.getElementById('btn-en');
+            const t = translations[lang];
+
+            // Update all text content
+            document.getElementById('tagline').textContent = t.tagline;
+            document.getElementById('hero-title').textContent = t.heroTitle;
+            document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
+            document.getElementById('cta-button').textContent = t.ctaButton;
+            document.getElementById('services-title').textContent = t.servicesTitle;
+            document.getElementById('service1-desc').textContent = t.service1Desc;
+            document.getElementById('service2-desc').textContent = t.service2Desc;
+            document.getElementById('service3-desc').textContent = t.service3Desc;
+            document.getElementById('service4-desc').textContent = t.service4Desc;
+            document.getElementById('service5-desc').textContent = t.service5Desc;
+            document.getElementById('service6-title').textContent = t.service6Title;
+            document.getElementById('service6-desc').textContent = t.service6Desc;
+            document.getElementById('schedule-title').textContent = t.scheduleTitle;
+            document.getElementById('schedule1').textContent = t.schedule1;
+            document.getElementById('schedule2').textContent = t.schedule2;
+            document.getElementById('schedule3').textContent = t.schedule3;
+            document.getElementById('schedule4').textContent = t.schedule4;
+            document.getElementById('portfolio-title').textContent = t.portfolioTitle;
+            document.getElementById('portfolio-ph1').textContent = t.portfolioPh1;
+            document.getElementById('portfolio-ph2').textContent = t.portfolioPh2;
+            document.getElementById('portfolio-ph3').textContent = t.portfolioPh3;
+            document.getElementById('portfolio-ph4').textContent = t.portfolioPh4;
+            document.getElementById('portfolio-ph5').textContent = t.portfolioPh5;
+            document.getElementById('portfolio-ph6').textContent = t.portfolioPh6;
+            document.getElementById('project1-title').textContent = t.project1Title;
+            document.getElementById('project2-title').textContent = t.project2Title;
+            document.getElementById('project3-title').textContent = t.project3Title;
+            document.getElementById('project4-title').textContent = t.project4Title;
+            document.getElementById('project5-title').textContent = t.project5Title;
+            document.getElementById('project6-title').textContent = t.project6Title;
+            document.getElementById('project1-desc').textContent = t.project1Desc;
+            document.getElementById('project2-desc').textContent = t.project2Desc;
+            document.getElementById('project3-desc').textContent = t.project3Desc;
+            document.getElementById('project4-desc').textContent = t.project4Desc;
+            document.getElementById('project5-desc').textContent = t.project5Desc;
+            document.getElementById('project6-desc').textContent = t.project6Desc;
+            document.getElementById('contact-title').textContent = t.contactTitle;
+            document.getElementById('contact-subtitle').textContent = t.contactSubtitle;
+            document.getElementById('phone-label').textContent = t.phoneLabel;
+            document.getElementById('owner-label').textContent = t.ownerLabel;
+            document.getElementById('copyright').textContent = t.copyright;
+            document.getElementById('developed').textContent = t.developed;
+
+            // Update button states
+            if (lang === 'pt') {
+                btnPt.classList.add('active');
+                btnEn.classList.remove('active');
+                document.documentElement.lang = 'pt-BR';
+            } else {
+                btnEn.classList.add('active');
+                btnPt.classList.remove('active');
+                document.documentElement.lang = 'en-US';
+            }
+
+            // Save preference
+            localStorage.setItem('language', lang);
+        }
+
+        // Load saved language preference (default to English for US audience)
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('language') || 'en';
+            switchLanguage(savedLang);
+        });
+
+        // Smooth scroll for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
